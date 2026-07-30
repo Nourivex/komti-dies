@@ -1,5 +1,5 @@
 /**
- * TikaPage v2 — Full-page TIKA Campus Assistant
+ * TikaPage v2 - Full-page TIKA Campus Assistant
  *
  * Uses comprehensive knowledge base from tika-knowledge.ts
  */
@@ -97,7 +97,7 @@ function findResponse(input: string): string {
     const d4 = ALL_PROGRAMS.filter((p) => p.level === "D4");
     const profesi = ALL_PROGRAMS.filter((p) => p.level === "Profesi");
     const d3 = ALL_PROGRAMS.filter((p) => p.level === "D3");
-    return `${UHN_PROFILE.abbreviation} memiliki ${ALL_PROGRAMS.length} program studi:\n\n🎓 SARJANA (S1) — ${s1.length} program:\n${s1.map((p) => `• ${p.name} (${p.registration_fee})`).join("\n")}\n\n📋 SARJANA TERAPAN (D4) — ${d4.length} program:\n${d4.map((p) => `• ${p.name} (${p.registration_fee})`).join("\n")}\n\n⚕️ PROFESI — ${profesi.length} program:\n${profesi.map((p) => `• ${p.name}`).join("\n")}\n\n🔧 DIPLOMA (D3) — ${d3.length} program:\n${d3.map((p) => `• ${p.name} (${p.registration_fee})`).join("\n")}\n\nMau tahu detail salah satu? Ketik nama prodi!`;
+    return `${UHN_PROFILE.abbreviation} memiliki ${ALL_PROGRAMS.length} program studi:\n\n🎓 SARJANA (S1) - ${s1.length} program:\n${s1.map((p) => `• ${p.name} (${p.registration_fee})`).join("\n")}\n\n📋 SARJANA TERAPAN (D4) - ${d4.length} program:\n${d4.map((p) => `• ${p.name} (${p.registration_fee})`).join("\n")}\n\n⚕️ PROFESI - ${profesi.length} program:\n${profesi.map((p) => `• ${p.name}`).join("\n")}\n\n🔧 DIPLOMA (D3) - ${d3.length} program:\n${d3.map((p) => `• ${p.name} (${p.registration_fee})`).join("\n")}\n\nMau tahu detail salah satu? Ketik nama prodi!`;
   }
 
   // Sarjana Terapan programs
@@ -125,7 +125,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💻 Skill yang Dipelajari:\n${p.skills.map((s) => `• ${s}`).join("\n")}\n\n💼 Karier & Gaji:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}\n\n🏗️ Lab:\n${p.labFacilities.map((l) => `• ${l}`).join("\n")}\n\n📜 Sertifikasi:\n${p.certifications.map((c) => `• ${c}`).join("\n")}\n\n✨ Kenapa Pilih Ini:\n${p.whyChoose}\n\n👤 Cocok Untuk:\n${p.suitableFor}`;
+      )}\n\n💻 Skill yang Dipelajari:\n${p.skills.map((s) => `• ${s}`).join("\n")}\n\n💼 Karier & Gaji:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}\n\n🏗️ Lab:\n${p.labFacilities.map((l) => `• ${l}`).join("\n")}\n\n📜 Sertifikasi:\n${p.certifications.map((c) => `• ${c}`).join("\n")}\n\n✨ Kenapa Pilih Ini:\n${p.whyChoose}\n\n👤 Cocok Untuk:\n${p.suitableFor}`;
   }
 
   // Specific program: Sistem Informasi
@@ -136,7 +136,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}\n\n✨ ${p.whyChoose}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}\n\n✨ ${p.whyChoose}`;
   }
 
   // Specific program: Sains Data
@@ -147,7 +147,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💻 Skill:\n${p.skills.map((s) => `• ${s}`).join("\n")}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}\n\n✨ ${p.whyChoose}`;
+      )}\n\n💻 Skill:\n${p.skills.map((s) => `• ${s}`).join("\n")}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}\n\n✨ ${p.whyChoose}`;
   }
 
   // Specific program: Teknik Mesin
@@ -158,7 +158,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}\n\n✨ ${p.whyChoose}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}\n\n✨ ${p.whyChoose}`;
   }
 
   // Specific program: Akuntansi
@@ -169,7 +169,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}`;
   }
 
   // Specific program: Hukum
@@ -180,7 +180,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}`;
   }
 
   // Specific program: Ilmu Komunikasi
@@ -191,7 +191,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}`;
   }
 
   // Specific program: Manajemen
@@ -202,7 +202,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}`;
   }
 
   // Specific program: Psikologi
@@ -213,7 +213,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}`;
   }
 
   // Specific program: PGSD
@@ -224,7 +224,7 @@ function findResponse(input: string): string {
       .map((c) => `• ${c}`)
       .join(
         "\n",
-      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} — ${c.salary}`).join("\n")}`;
+      )}\n\n💼 Karier:\n${p.careers.map((c) => `• ${c.title} - ${c.salary}`).join("\n")}`;
   }
 
   // Detail specific program
@@ -260,15 +260,15 @@ function findResponse(input: string): string {
     )
       .map((o) => `• ${o.name}${o.full_name ? ` (${o.full_name})` : ""}`)
       .join("\n")}\n\n🎮 UKM:\n${ORGANIZATIONS.filter((o) => o.type === "UKM")
-      .map((o) => `• ${o.name}`)
-      .join("\n")}`;
+        .map((o) => `• ${o.name}`)
+        .join("\n")}`;
   }
 
   // Career
   if (
     match(text, ["karier", "kerja", "lulusan", "prospek", "kerjaan", "gaji"])
   ) {
-    return `Prospek Karier Lulusan ${UHN_PROFILE.abbreviation}:\n\n${CAREER_PROSPECTS.map((c) => `• ${c.career} — ${c.salary} (Demand: ${c.demand})`).join("\n")}\n\n🔥 Demand IT sangat tinggi di Indonesia!`;
+    return `Prospek Karier Lulusan ${UHN_PROFILE.abbreviation}:\n\n${CAREER_PROSPECTS.map((c) => `• ${c.career} - ${c.salary} (Demand: ${c.demand})`).join("\n")}\n\n🔥 Demand IT sangat tinggi di Indonesia!`;
   }
 
   // Scholarships
@@ -455,7 +455,7 @@ export function TikaPage() {
         </div>
       </header>
 
-      {/* Main Layout — fixed height, no scroll on outer container */}
+      {/* Main Layout - fixed height, no scroll on outer container */}
       <div className="flex h-screen pt-20 overflow-hidden">
         {/* LEFT: 3D Character */}
         <div className="relative hidden w-1/2 lg:block">
@@ -512,7 +512,7 @@ export function TikaPage() {
           </div>
         </div>
 
-        {/* RIGHT: Chat Interface — fixed height, scrollable messages */}
+        {/* RIGHT: Chat Interface - fixed height, scrollable messages */}
         <div className="flex h-full w-full flex-col overflow-hidden border-l border-glass-border lg:w-1/2">
           {/* Mobile 3D header */}
           <div className="relative h-40 w-full shrink-0 border-b border-glass-border bg-gradient-to-b from-rose/5 to-transparent lg:hidden">
@@ -540,7 +540,7 @@ export function TikaPage() {
             </CanvasErrorBoundary>
           </div>
 
-          {/* Quick Topics — wrap, no horizontal scroll */}
+          {/* Quick Topics - wrap, no horizontal scroll */}
           <div className="flex flex-wrap gap-2 border-b border-glass-border px-4 py-3 shrink-0">
             {quickTopics.map((topic) => (
               <button
@@ -554,7 +554,7 @@ export function TikaPage() {
             ))}
           </div>
 
-          {/* Messages — only this area scrolls */}
+          {/* Messages - only this area scrolls */}
           <div className="min-h-0 flex-1 overflow-y-auto px-6 py-6">
             <div className="mx-auto max-w-lg space-y-5">
               {messages.map((msg) => (
@@ -571,11 +571,10 @@ export function TikaPage() {
                     </div>
                   )}
                   <div
-                    className={`max-w-[80%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed ${
-                      msg.sender === "user"
+                    className={`max-w-[80%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed ${msg.sender === "user"
                         ? "bg-[image:var(--gradient-cta)] text-white rounded-br-sm"
                         : "glass-panel rounded-bl-sm"
-                    }`}
+                      }`}
                   >
                     {msg.sender === "bot" && (
                       <span className="mb-1 block text-[0.65rem] font-medium text-rose">

@@ -1,5 +1,5 @@
 /**
- * TikaGLBLoader v3 — Load GLB with morph target lip sync + bone animation.
+ * TikaGLBLoader v3 - Load GLB with morph target lip sync + bone animation.
  *
  * Features:
  * - Auto-scale to fit viewport

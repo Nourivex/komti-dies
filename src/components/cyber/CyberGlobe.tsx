@@ -1,5 +1,5 @@
 /**
- * CyberGlobe — 3D Earth with GeoJSON GIS Geography, 7 Continent Color Identification,
+ * CyberGlobe - 3D Earth with GeoJSON GIS Geography, 7 Continent Color Identification,
  * Live Threat Heatmaps, Hotspot Beacon Indicators, and Tactical Pause Freeze Control.
  */
 
@@ -510,7 +510,7 @@ const Earth = memo(function Earth({ radius, heatmapMode }: { radius: number; hea
         cachedGeoData = data;
         setGeoData(data);
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const texture = useMemo(() => {

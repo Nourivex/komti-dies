@@ -1,5 +1,5 @@
 /**
- * TikaChat v3 — Floating Chat with 3D Character
+ * TikaChat v3 - Floating Chat with 3D Character
  *
  * Uses shared knowledge base from tika-knowledge.ts
  */
@@ -65,7 +65,7 @@ function findResponse(input: string): string {
     return `Organisasi & UKM:\n${ORGANIZATIONS.map((o) => `• ${o.name}`).join("\n")}`;
 
   if (match(text, ["karier", "kerja", "lulusan", "prospek"]))
-    return `Prospek Karier:\n${CAREER_PROSPECTS.map((c) => `• ${c.career} — ${c.salary}`).join("\n")}`;
+    return `Prospek Karier:\n${CAREER_PROSPECTS.map((c) => `• ${c.career} - ${c.salary}`).join("\n")}`;
 
   if (match(text, ["beasiswa"]))
     return `Beasiswa:\n${SCHOLARSHIPS.map((s) => `🏆 ${s}`).join("\n")}`;

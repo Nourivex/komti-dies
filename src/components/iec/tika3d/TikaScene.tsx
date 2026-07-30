@@ -1,5 +1,5 @@
 /**
- * TikaScene — 3D scene wrapper with error boundary for R3F + TanStack Router compatibility.
+ * TikaScene - 3D scene wrapper with error boundary for R3F + TanStack Router compatibility.
  */
 
 import { Suspense } from "react";

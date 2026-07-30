@@ -1,5 +1,5 @@
 /**
- * CyberFeed — Live Telemetry Attack Stream.
+ * CyberFeed - Live Telemetry Attack Stream.
  */
 
 import { motion, AnimatePresence } from "motion/react";

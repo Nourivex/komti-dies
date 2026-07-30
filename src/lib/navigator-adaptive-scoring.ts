@@ -1,5 +1,5 @@
 /**
- * Adaptive scoring — menghitung hasil dari adaptive question path
+ * Adaptive scoring - menghitung hasil dari adaptive question path
  */
 import {
   CAREER_PROFILES,
@@ -63,7 +63,7 @@ function aggregateCareerScores(
   for (const [questionId, answerIndex] of state.answers) {
     // Find question in all questions
     const allQuestions = [
-      // Import dynamically not needed — we search by id
+      // Import dynamically not needed - we search by id
     ];
 
     // We need to search through the engine's questions
@@ -105,7 +105,7 @@ function findQuestionById(
  * Get all questions from the engine
  */
 function getAllQuestions() {
-  // Dynamic import not needed — we inline the question data reference
+  // Dynamic import not needed - we inline the question data reference
   // The questions are stable, so we can reconstruct the lookup
   const questions: Array<{
     id: string;
@@ -120,7 +120,7 @@ function getAllQuestions() {
 }
 
 /**
- * Main scoring function — takes adaptive state, returns result
+ * Main scoring function - takes adaptive state, returns result
  */
 export function calculateAdaptiveResult(
   state: NavigatorState,

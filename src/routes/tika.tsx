@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TikaPage } from "@/components/iec/tika3d/TikaPage";
 
-const title = "TIKA — Campus Assistant | Informatics Experience Center";
+const title = "TIKA - Campus Assistant | Informatics Experience Center";
 const description =
   "Tanya apa saja tentang kampus, program studi, pendaftaran, fasilitas, dan karier lulusan Universitas Harkat Negeri.";
 

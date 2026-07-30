@@ -1,5 +1,5 @@
 /**
- * CyberPage — Global Cyber Intelligence Threat Map.
+ * CyberPage - Global Cyber Intelligence Threat Map.
  *
  * Full 3D Earth visualization with GeoJSON GIS landmasses, 7 Continent Color Schemes,
  * real-time attack hotspot beacons, FPS Governor (20/30/40/60 FPS), speed controls, and telemetry feed.
@@ -42,7 +42,7 @@ export function CyberPage() {
   const [speed, setSpeed] = useState(1);
   const [targetFps, setTargetFps] = useState<number>(60);
 
-  // Filters & Modes — Default to "continent" mode so 7 continent colors are instantly visible
+  // Filters & Modes - Default to "continent" mode so 7 continent colors are instantly visible
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedContinent, setSelectedContinent] = useState<string>("all");
   const [cityFilter, setCityFilter] = useState<string>("all"); // "all" | "hotspots"
@@ -233,9 +233,8 @@ export function CyberPage() {
 
             <button
               onClick={() => setAutoRotate((prev) => !prev)}
-              className={`glass-panel flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-medium transition ${
-                autoRotate ? "border-rose/40 text-rose" : "text-muted-foreground"
-              }`}
+              className={`glass-panel flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-medium transition ${autoRotate ? "border-rose/40 text-rose" : "text-muted-foreground"
+                }`}
             >
               <RotateCw className={`h-3.5 w-3.5 ${autoRotate ? "animate-spin" : ""}`} />
               <span>Rotasi {autoRotate ? "ON" : "OFF"}</span>
@@ -248,9 +247,8 @@ export function CyberPage() {
                 <button
                   key={sp}
                   onClick={() => changeSpeed(sp)}
-                  className={`rounded-lg px-2 py-0.5 font-mono text-[0.7rem] font-bold transition ${
-                    speed === sp ? "bg-rose text-white shadow" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`rounded-lg px-2 py-0.5 font-mono text-[0.7rem] font-bold transition ${speed === sp ? "bg-rose text-white shadow" : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   {sp}x
                 </button>
@@ -265,9 +263,8 @@ export function CyberPage() {
                 <button
                   key={fps}
                   onClick={() => setTargetFps(fps)}
-                  className={`rounded-lg px-2 py-0.5 font-mono text-[0.7rem] font-bold transition ${
-                    targetFps === fps ? "bg-emerald-500 text-white shadow" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`rounded-lg px-2 py-0.5 font-mono text-[0.7rem] font-bold transition ${targetFps === fps ? "bg-emerald-500 text-white shadow" : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   {fps}
                 </button>
@@ -279,17 +276,15 @@ export function CyberPage() {
               <Layers className="ml-1 h-3.5 w-3.5 text-cyan-400" />
               <button
                 onClick={() => setHeatmapMode("continent")}
-                className={`rounded-lg px-2.5 py-1 text-[0.65rem] font-bold transition ${
-                  heatmapMode === "continent" ? "bg-indigo-600 text-white shadow" : "text-muted-foreground hover:text-foreground"
-                }`}
+                className={`rounded-lg px-2.5 py-1 text-[0.65rem] font-bold transition ${heatmapMode === "continent" ? "bg-indigo-600 text-white shadow" : "text-muted-foreground hover:text-foreground"
+                  }`}
               >
                 🌈 7 Warna Benua
               </button>
               <button
                 onClick={() => setHeatmapMode("spectrum")}
-                className={`rounded-lg px-2.5 py-1 text-[0.65rem] font-bold transition ${
-                  heatmapMode === "spectrum" ? "bg-cyan-500 text-white shadow" : "text-muted-foreground hover:text-foreground"
-                }`}
+                className={`rounded-lg px-2.5 py-1 text-[0.65rem] font-bold transition ${heatmapMode === "spectrum" ? "bg-cyan-500 text-white shadow" : "text-muted-foreground hover:text-foreground"
+                  }`}
               >
                 ⚡ Cyber Standard
               </button>
@@ -305,9 +300,8 @@ export function CyberPage() {
                 </span>
                 <button
                   onClick={() => setCityFilter((prev) => (prev === "hotspots" ? "all" : "hotspots"))}
-                  className={`rounded-full px-2 py-0.5 text-[0.65rem] font-bold transition ${
-                    cityFilter === "hotspots" ? "bg-rose text-white" : "bg-muted/40 text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`rounded-full px-2 py-0.5 text-[0.65rem] font-bold transition ${cityFilter === "hotspots" ? "bg-rose text-white" : "bg-muted/40 text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   {cityFilter === "hotspots" ? "Hotspot Only" : "Filter Hotspot"}
                 </button>
@@ -322,9 +316,8 @@ export function CyberPage() {
                     return (
                       <div key={city.name} className="flex items-center justify-between text-xs">
                         <div className="flex items-center gap-2 truncate">
-                          <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[0.6rem] font-bold ${
-                            idx === 0 ? "bg-rose text-white" : idx === 1 ? "bg-amber-500 text-white" : "bg-muted text-muted-foreground"
-                          }`}>
+                          <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[0.6rem] font-bold ${idx === 0 ? "bg-rose text-white" : idx === 1 ? "bg-amber-500 text-white" : "bg-muted text-muted-foreground"
+                            }`}>
                             {idx + 1}
                           </span>
                           <span className="font-medium truncate">{city.name}</span>
@@ -352,11 +345,10 @@ export function CyberPage() {
                 <button
                   key={c.id}
                   onClick={() => setSelectedContinent(c.id)}
-                  className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold shrink-0 transition ${
-                    selectedContinent === c.id
+                  className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold shrink-0 transition ${selectedContinent === c.id
                       ? "bg-foreground text-background shadow-md scale-105"
                       : "glass-panel text-muted-foreground hover:text-foreground"
-                  }`}
+                    }`}
                 >
                   <span
                     className="h-2.5 w-2.5 rounded-full shadow-sm"
@@ -374,21 +366,19 @@ export function CyberPage() {
               </span>
               <button
                 onClick={() => setSelectedCategory("all")}
-                className={`rounded-full px-3 py-1 text-xs font-medium shrink-0 transition ${
-                  selectedCategory === "all"
+                className={`rounded-full px-3 py-1 text-xs font-medium shrink-0 transition ${selectedCategory === "all"
                     ? "bg-rose text-white shadow-md shadow-rose/20"
                     : "glass-panel text-muted-foreground hover:text-foreground"
-                }`}
+                  }`}
               >
                 Semua Serangan
               </button>
               <button
                 onClick={() => setSelectedCategory("critical")}
-                className={`rounded-full px-3 py-1 text-xs font-semibold shrink-0 transition ${
-                  selectedCategory === "critical"
+                className={`rounded-full px-3 py-1 text-xs font-semibold shrink-0 transition ${selectedCategory === "critical"
                     ? "bg-amber-500 text-white shadow-md"
                     : "glass-panel text-amber-400 hover:text-amber-300"
-                }`}
+                  }`}
               >
                 ⚠️ Level Kritis
               </button>
@@ -396,11 +386,10 @@ export function CyberPage() {
                 <button
                   key={type.id}
                   onClick={() => setSelectedCategory(type.id)}
-                  className={`rounded-full px-3 py-1 text-xs font-medium shrink-0 transition ${
-                    selectedCategory === type.id
+                  className={`rounded-full px-3 py-1 text-xs font-medium shrink-0 transition ${selectedCategory === type.id
                       ? "text-white shadow-md"
                       : "glass-panel text-muted-foreground hover:text-foreground"
-                  }`}
+                    }`}
                   style={
                     selectedCategory === type.id
                       ? { backgroundColor: type.color }

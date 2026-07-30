@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CyberPage } from "@/components/cyber/CyberPage";
 
-const title = "Global Cyber Intelligence — Informatics Experience Center";
+const title = "Global Cyber Intelligence - Informatics Experience Center";
 const description =
   "Saksikan visualisasi ancaman siber dunia secara langsung melalui peta interaktif, aliran serangan real-time, dan statistik keamanan global.";
 

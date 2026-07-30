@@ -1,5 +1,5 @@
 /**
- * TikaCharacter — 3D Chibi Girl for TIKA Chatbot
+ * TikaCharacter - 3D Chibi Girl for TIKA Chatbot
  *
  * Two modes:
  * 1. Placeholder: Built-in procedural character (works immediately)
@@ -18,7 +18,7 @@ interface TikaCharacterProps {
 }
 
 /**
- * Placeholder Chibi Girl — built from Three.js primitives.
+ * Placeholder Chibi Girl - built from Three.js primitives.
  * Replace this with GLB model when ready.
  */
 export function TikaCharacter({
@@ -55,7 +55,7 @@ export function TikaCharacter({
     // Subtle sway
     groupRef.current.rotation.z = Math.sin(time.current * 0.8) * 0.03;
 
-    // Speaking animation — mouth opens/closes
+    // Speaking animation - mouth opens/closes
     if (mouthRef.current) {
       if (speaking) {
         const mouthOpen = 0.5 + Math.abs(Math.sin(time.current * 12)) * 0.5;
@@ -95,7 +95,7 @@ export function TikaCharacter({
       );
     }
 
-    // Thinking — eyes look up slightly
+    // Thinking - eyes look up slightly
     if (thinking) {
       if (leftEyeRef.current) leftEyeRef.current.position.y = 0.15;
       if (rightEyeRef.current) rightEyeRef.current.position.y = 0.15;
@@ -128,13 +128,13 @@ export function TikaCharacter({
             <meshStandardMaterial color={skinColor} roughness={0.6} />
           </mesh>
 
-          {/* Hair — back */}
+          {/* Hair - back */}
           <mesh position={[0, 0.08, -0.12]}>
             <sphereGeometry args={[0.45, 32, 32]} />
             <meshStandardMaterial color={hairColor} roughness={0.8} />
           </mesh>
 
-          {/* Hair — bangs */}
+          {/* Hair - bangs */}
           <mesh position={[0, 0.25, 0.18]}>
             <sphereGeometry
               args={[0.3, 16, 16, 0, Math.PI * 2, 0, Math.PI * 0.5]}
@@ -142,19 +142,19 @@ export function TikaCharacter({
             <meshStandardMaterial color={hairColor} roughness={0.8} />
           </mesh>
 
-          {/* Hair — side left */}
+          {/* Hair - side left */}
           <mesh position={[-0.32, -0.05, 0.05]}>
             <capsuleGeometry args={[0.08, 0.35, 4, 8]} />
             <meshStandardMaterial color={hairColor} roughness={0.8} />
           </mesh>
 
-          {/* Hair — side right */}
+          {/* Hair - side right */}
           <mesh position={[0.32, -0.05, 0.05]}>
             <capsuleGeometry args={[0.08, 0.35, 4, 8]} />
             <meshStandardMaterial color={hairColor} roughness={0.8} />
           </mesh>
 
-          {/* Hair — ponytail */}
+          {/* Hair - ponytail */}
           <mesh position={[0, 0.1, -0.35]} rotation={[0.4, 0, 0]}>
             <capsuleGeometry args={[0.06, 0.5, 4, 8]} />
             <meshStandardMaterial color={hairColor} roughness={0.8} />

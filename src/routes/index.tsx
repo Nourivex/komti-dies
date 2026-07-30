@@ -8,7 +8,7 @@ import { About } from "@/components/iec/About";
 import { Footer } from "@/components/iec/Footer";
 import { useTheme } from "@/components/ThemeProvider";
 
-const title = "Informatics Experience Center — Universitas Harkat Negeri";
+const title = "Informatics Experience Center - Universitas Harkat Negeri";
 const description =
   "Pameran teknologi interaktif Fakultas Informatika Universitas Harkat Negeri: jelajahi AI, Cyber Security, Cloud, dan inovasi digital di Dies Natalis 2026.";
 
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Event",
-          name: "Informatics Experience Center — Dies Natalis 2026",
+          name: "Informatics Experience Center - Dies Natalis 2026",
           description,
           organizer: {
             "@type": "CollegeOrUniversity",

@@ -89,7 +89,7 @@ export const Route = createRootRouteWithContext<{
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "Informatics Experience Center — Universitas Harkat Negeri",
+        title: "Informatics Experience Center - Universitas Harkat Negeri",
       },
       {
         name: "description",

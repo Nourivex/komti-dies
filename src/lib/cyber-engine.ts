@@ -1,5 +1,5 @@
 /**
- * Cyber Attack Simulation Engine — Realistic Threat Campaign Engine.
+ * Cyber Attack Simulation Engine - Realistic Threat Campaign Engine.
  *
  * Simulates authentic cyber warfare campaigns, APT infiltrations, DDoS bursts,
  * and national cyber defense shields with realistic cadence and zero monotony.
@@ -74,7 +74,7 @@ const CAMPAIGNS = [
 /** Generate a realistic, campaign-driven attack event */
 function generateCampaignAttack(currentCampaignIndex: number): Attack {
   const campaignInfo = CAMPAIGNS[currentCampaignIndex % CAMPAIGNS.length];
-  
+
   // Select Source & Target based on campaign context
   const indoCities = CITIES.filter((c) => c.country === "Indonesia");
   const foreignCities = CITIES.filter((c) => c.country !== "Indonesia");
@@ -108,7 +108,7 @@ function generateCampaignAttack(currentCampaignIndex: number): Attack {
 
   const port = randomFromArray(COMMON_PORTS);
   const protocol = randomFromArray(PROTOCOLS);
-  
+
   const bwBase = type.severity === "critical" ? 400 + Math.random() * 550 : Math.random() * 300 + 10;
   const unit = type.severity === "critical" ? "Gbps" : type.severity === "high" ? "Mbps" : "Kbps";
 
@@ -146,7 +146,7 @@ export function calculateStats(recentAttacks: Attack[]): CyberStats {
   recentAttacks.forEach((a) => {
     targetCounts[a.target.name] = (targetCounts[a.target.name] || 0) + 1;
   });
-  
+
   const sortedTargets = Object.entries(targetCounts).sort((a, b) => b[1] - a[1]);
   const topTarget = sortedTargets[0] ? `${sortedTargets[0][0]} (${sortedTargets[0][1]})` : "—";
 

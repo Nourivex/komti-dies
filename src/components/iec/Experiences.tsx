@@ -57,7 +57,7 @@ const experiences: Experience[] = [
     id: "tika",
     tag: "Chat Assistant",
     icon: MessageCircle,
-    title: "TIKA — Campus Assistant",
+    title: "TIKA - Campus Assistant",
     description:
       "Tanya apa saja tentang kampus, program studi, pendaftaran, fasilitas, dan karier lulusan. TIKA siap membantu!",
     points: [
@@ -215,7 +215,7 @@ export function Experiences() {
         </div>
       </div>
 
-      {/* TIKA Chatbot — floating button */}
+      {/* TIKA Chatbot - floating button */}
       <TikaChat />
     </section>
   );

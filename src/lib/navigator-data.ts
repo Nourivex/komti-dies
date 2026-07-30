@@ -471,7 +471,7 @@ export const CAREER_PROFILES: CareerProfile[] = [
     name: "Software Engineer",
     tagline: "Si Pembangun Digital",
     description:
-      "Merancang dan membangun software yang kompleks — dari mobile apps sampai sistem bank. Mereka yang bikin teknologi berjalan.",
+      "Merancang dan membangun software yang kompleks - dari mobile apps sampai sistem bank. Mereka yang bikin teknologi berjalan.",
     skills: ["Programming", "Algorithms", "System Design", "Git", "Testing"],
     programs: ["S1-TI", "D4-TI"],
   },
@@ -504,7 +504,7 @@ export const CAREER_PROFILES: CareerProfile[] = [
     name: "Digital Marketing Specialist",
     tagline: "Si Ahli Pemasaran Online",
     description:
-      "Membuat strategi pemasaran di digital — dari social media ads sampai SEO. Mereka yang bikin kamu tertarik beli produk dari Instagram.",
+      "Membuat strategi pemasaran di digital - dari social media ads sampai SEO. Mereka yang bikin kamu tertarik beli produk dari Instagram.",
     skills: [
       "SEO/SEM",
       "Social Media",
@@ -519,7 +519,7 @@ export const CAREER_PROFILES: CareerProfile[] = [
     name: "Content Creator",
     tagline: "Si Pembuat Konten Digital",
     description:
-      "Membuat konten yang mengedukasi, menghibur, atau menginspirasi — di YouTube, TikTok, blog, atau platform lainnya.",
+      "Membuat konten yang mengedukasi, menghibur, atau menginspirasi - di YouTube, TikTok, blog, atau platform lainnya.",
     skills: [
       "Video Editing",
       "Writing",
@@ -534,7 +534,7 @@ export const CAREER_PROFILES: CareerProfile[] = [
     name: "Graphic Designer",
     tagline: "Si Visual Storyteller",
     description:
-      "Menerjemahkan ide menjadi visual yang menarik — logo, poster, packaging, hingga UI digital. Kreativitas tanpa batas.",
+      "Menerjemahkan ide menjadi visual yang menarik - logo, poster, packaging, hingga UI digital. Kreativitas tanpa batas.",
     skills: [
       "Adobe Illustrator",
       "Photoshop",
@@ -603,7 +603,7 @@ export const CAREER_PROFILES: CareerProfile[] = [
     name: "EdTech Developer",
     tagline: "Si Pengembang Teknologi Pendidikan",
     description:
-      "Membuat teknologi yang membantu proses belajar mengajar — dari platform e-learning sampai aplikasi edukasi untuk anak-anak.",
+      "Membuat teknologi yang membantu proses belajar mengajar - dari platform e-learning sampai aplikasi edukasi untuk anak-anak.",
     skills: [
       "Web Development",
       "UX Design",

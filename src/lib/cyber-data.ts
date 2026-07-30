@@ -1,5 +1,5 @@
 /**
- * Cyber Intelligence — Geographic Data & Attack Types
+ * Cyber Intelligence - Geographic Data & Attack Types
  *
  * 450 Real Global Cities & Cyber Internet Nodes across all 7 Continents
  * with precise GIS latitude/longitude coordinates and population data.
@@ -24,7 +24,7 @@ export interface AttackType {
 }
 
 // ═══════════════════════════════════════════════════════════
-// CITIES — 450 Real Cities Across 7 Continents
+// CITIES - 450 Real Cities Across 7 Continents
 // ═══════════════════════════════════════════════════════════
 export const CITIES: City[] = [
   // ─── Indonesia (38 Regional Nodes) ───

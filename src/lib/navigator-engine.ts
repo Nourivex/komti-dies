@@ -2,7 +2,7 @@
  * Adaptive Career Navigator Engine
  *
  * Sistem pakar tanpa backend menggunakan Decision Tree + Weighted Scoring.
- * Soal dinamis berdasarkan jawaban sebelumnya — user merasa "dipahami".
+ * Soal dinamis berdasarkan jawaban sebelumnya - user merasa "dipahami".
  */
 
 export type CareerId =
@@ -211,17 +211,17 @@ const PHASE_2_QUESTIONS: AdaptiveQuestion[] = [
     title: "Kalau liat website keren, kamu lebih penasaran sama...",
     options: [
       {
-        label: "Kode di baliknya — gimana cara kerjanya?",
+        label: "Kode di baliknya - gimana cara kerjanya?",
         scores: { software_engineer: 3, frontend_dev: 3 },
         cluster: "tech_logic",
       },
       {
-        label: "Tampilan & animasinya — gimana cara bikin smooth?",
+        label: "Tampilan & animasinya - gimana cara bikin smooth?",
         scores: { frontend_dev: 4, uiux_designer: 2 },
         cluster: "creative_visual",
       },
       {
-        label: "Keamanannya — apakah data aku aman di sini?",
+        label: "Keamanannya - apakah data aku aman di sini?",
         scores: { cyber_security: 4, cloud_engineer: 2 },
         cluster: "tech_logic",
       },
@@ -234,12 +234,12 @@ const PHASE_2_QUESTIONS: AdaptiveQuestion[] = [
     title: "Bahasa pemrograman mana yang paling menarik buat kamu?",
     options: [
       {
-        label: "JavaScript/TypeScript — bikin website interaktif",
+        label: "JavaScript/TypeScript - bikin website interaktif",
         scores: { frontend_dev: 4, software_engineer: 2 },
         cluster: "tech_logic",
       },
       {
-        label: "Python — data science, AI, automation",
+        label: "Python - data science, AI, automation",
         scores: { ai_engineer: 3, data_analyst: 3, software_engineer: 2 },
         cluster: "data_analysis",
       },
@@ -282,17 +282,17 @@ const PHASE_2_QUESTIONS: AdaptiveQuestion[] = [
     title: "Tool desain mana yang paling kamu pengen kuasai?",
     options: [
       {
-        label: "Figma — bikin UI/UX prototype",
+        label: "Figma - bikin UI/UX prototype",
         scores: { uiux_designer: 5, frontend_dev: 1 },
         cluster: "creative_visual",
       },
       {
-        label: "Adobe Illustrator/Photoshop — desain grafis",
+        label: "Adobe Illustrator/Photoshop - desain grafis",
         scores: { graphic_designer: 5, content_creator: 1 },
         cluster: "creative_visual",
       },
       {
-        label: "CapCut/Premiere — bikin konten video",
+        label: "CapCut/Premiere - bikin konten video",
         scores: { content_creator: 5, digital_marketing: 2 },
         cluster: "creative_visual",
       },
@@ -404,12 +404,12 @@ const PHASE_2_QUESTIONS: AdaptiveQuestion[] = [
     title: "Gimana cara kamu mempengaruhi orang lain?",
     options: [
       {
-        label: "Data & fakta — kalo aku bisa buktikan, mereka pasti percaya",
+        label: "Data & fakta - kalo aku bisa buktikan, mereka pasti percaya",
         scores: { data_analyst: 3, lawyer: 3, accountant: 2 },
         cluster: "data_analysis",
       },
       {
-        label: "Cerita & emosi — kalo aku bisa bikin mereka relate",
+        label: "Cerita & emosi - kalo aku bisa bikin mereka relate",
         scores: {
           content_creator: 3,
           digital_marketing: 3,
@@ -418,7 +418,7 @@ const PHASE_2_QUESTIONS: AdaptiveQuestion[] = [
         cluster: "creative_visual",
       },
       {
-        label: "Logika & solusi — kalo aku bisa kasih jalan keluar",
+        label: "Logika & solusi - kalo aku bisa kasih jalan keluar",
         scores: { it_pm: 4, software_engineer: 2 },
         cluster: "tech_logic",
       },
@@ -433,17 +433,17 @@ const PHASE_2_QUESTIONS: AdaptiveQuestion[] = [
     title: "Data apa yang paling menarik buat kamu?",
     options: [
       {
-        label: "Data pengguna — kenapa orang pakai aplikasi ini?",
+        label: "Data pengguna - kenapa orang pakai aplikasi ini?",
         scores: { uiux_designer: 2, data_analyst: 4, user_researcher: 3 },
         cluster: "data_analysis",
       },
       {
-        label: "Data keuangan — profit, revenue, cash flow",
+        label: "Data keuangan - profit, revenue, cash flow",
         scores: { accountant: 4, it_pm: 2, data_analyst: 2 },
         cluster: "data_analysis",
       },
       {
-        label: "Data tren — apa yang bakal happen next?",
+        label: "Data tren - apa yang bakal happen next?",
         scores: { ai_engineer: 3, data_analyst: 4, digital_marketing: 2 },
         cluster: "data_analysis",
       },
@@ -479,17 +479,17 @@ const PHASE_2_QUESTIONS: AdaptiveQuestion[] = [
     title: "AI menurut kamu paling berguna untuk...",
     options: [
       {
-        label: "Prediksi — forecast penjualan, cuaca, tren",
+        label: "Prediksi - forecast penjualan, cuaca, tren",
         scores: { ai_engineer: 4, data_analyst: 3 },
         cluster: "data_analysis",
       },
       {
-        label: "Otomasi — bikin kerjaan repetitif jadi cepat",
+        label: "Otomasi - bikin kerjaan repetitif jadi cepat",
         scores: { software_engineer: 3, ai_engineer: 3, it_support: 1 },
         cluster: "tech_logic",
       },
       {
-        label: "Kreativitas — generate gambar, musik, teks",
+        label: "Kreativitas - generate gambar, musik, teks",
         scores: { content_creator: 3, ai_engineer: 2, graphic_designer: 2 },
         cluster: "creative_visual",
       },

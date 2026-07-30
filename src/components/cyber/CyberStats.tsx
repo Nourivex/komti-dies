@@ -1,5 +1,5 @@
 /**
- * CyberStats — Real-Time Telemetry Dashboard Panel.
+ * CyberStats - Real-Time Telemetry Dashboard Panel.
  */
 
 import { motion } from "motion/react";

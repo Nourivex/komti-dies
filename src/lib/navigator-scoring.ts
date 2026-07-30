@@ -394,7 +394,7 @@ function getProgramRecommendations(
 }
 
 /**
- * Main scoring function — takes answers, returns complete result.
+ * Main scoring function - takes answers, returns complete result.
  */
 export function calculateResult(
   answers: Map<number, number | number[]>,

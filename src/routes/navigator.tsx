@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NavigatorPage } from "@/components/navigator/NavigatorPage";
 
-const title = "AI Career Navigator — Informatics Experience Center";
+const title = "AI Career Navigator - Informatics Experience Center";
 const description =
   "Temukan jalur karier teknologi masa depanmu dengan bantuan kecerdasan buatan yang memetakan minat, kemampuan, dan potensimu.";
 
