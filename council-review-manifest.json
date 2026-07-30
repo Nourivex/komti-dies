@@ -1,0 +1,241 @@
+{
+  "review": {
+    "topic": "AI Career Navigator - Halaman Analysis",
+    "date": "2026-07-30",
+    "confidence": 88,
+    "ais_consulted": ["ChatGPT (UX Designer)", "Gemini (Product Manager + Technical Lead)"]
+  },
+  "consensus": {
+    "welcome_screen": {
+      "required": true,
+      "elements": ["Hero title", "Time estimate (3-5 min)", "Benefits list", "CTA Mulai Analisis", "Secondary CTA Lihat Contoh Hasil"]
+    },
+    "questionnaire": {
+      "question_count": "8-10",
+      "language": "Bahasa Indonesia casual SMA/SMK",
+      "progress_format": "Langkah X dari Y",
+      "sections": ["Minat Dasar", "Cara Berpikir", "Skill Saat Ini", "Gaya Kerja", "Tujuan Karier"]
+    },
+    "processing": {
+      "type": "progress_storytelling",
+      "duration": "4-6 seconds",
+      "elements": ["Checklist animasi", "Dynamic text berganti"]
+    },
+    "results": {
+      "career_matches": 3,
+      "radar_axes": "5-6 max",
+      "sections": ["Hero Summary (Persona Profile)", "Radar Chart", "Career Match Cards", "Skill Gap Bars", "Personal Roadmap", "Jurusan Recommendations", "Career Details Accordion", "Final CTA"]
+    }
+  },
+  "architecture": {
+    "approach": "deterministic_scoring",
+    "no_llm_api": true,
+    "scoring": "Weight matrix di frontend, normalize 0-100%",
+    "state_management": "TanStack Router Search Params atau Zustand",
+    "animations": "Framer Motion (card transitions, stagger reveal, processing aura)",
+    "charts": "Recharts untuk radar chart"
+  },
+  "implementation_phases": [
+    {
+      "phase": 1,
+      "name": "Core Flow",
+      "components": ["WelcomeScreen", "QuestionWizard", "ProcessingScreen", "ResultDashboard"]
+    },
+    {
+      "phase": 2,
+      "name": "Scoring Engine",
+      "components": ["scoring.ts", "types/navigator.ts", "careerProfiles.ts"]
+    },
+    {
+      "phase": 3,
+      "name": "Visualizations",
+      "components": ["RadarChart", "CareerCards", "SkillGapBars", "RoadmapTimeline"]
+    },
+    {
+      "phase": 4,
+      "name": "Polish",
+      "components": ["FramerMotion animations", "Responsive design", "Final CTAs"]
+    }
+  ],
+  "over_engineered_removed": [
+    "LLM API inference on-the-fly",
+    "60-100 question personality test",
+    "5-10 page AI reports",
+    "Excessive visualizations (pie + bar + network + heatmap)"
+  ],
+  "under_engineered_fixed": [
+    "Score explanations (why this career?)",
+    "Personalized roadmaps (not generic)",
+    "University program connections",
+    "Clear next steps after results"
+  ],
+  "university_programs": {
+    "university": "Universitas Harkat Negeri",
+    "total_programs": 19,
+    "faculties": [
+      {
+        "id": "saintek",
+        "name": "Fakultas Sains & Teknologi (Saintek)",
+        "description": "Mendorong kemampuan mahasiswa untuk berpikir sistematis melalui berbasis proyek, eksplorasi teknologi, dan kolaborasi antarbidang.",
+        "programs": [
+          {"code": "S1-TI", "name": "S-1 Teknik Informatika", "type": "Sarjana", "focus": "Software Engineering, AI, Cyber Security, Cloud Computing"},
+          {"code": "S1-SI", "name": "S-1 Sistem Informasi", "type": "Sarjana", "focus": "Business Analysis, IT Management, Database, Enterprise Systems"},
+          {"code": "S1-SD", "name": "S-1 Sains Data", "type": "Sarjana (Program Baru)", "focus": "Data Science, Machine Learning, Statistics, Big Data"},
+          {"code": "S1-TM", "name": "S-1 Teknik Mesin", "type": "Sarjana (Program Baru)", "focus": "Manufacturing, Robotics, CAD/CAM, Industrial Automation"}
+        ]
+      },
+      {
+        "id": "soshum",
+        "name": "Fakultas Sosial Humaniora (Soshum)",
+        "description": "Mengasah pemikiran kritis dan aplikatif mahasiswa dengan pemahaman lintas disiplin agar siap mengambil peran berdampak di tengah masyarakat yang terus berkembang.",
+        "programs": [
+          {"code": "S1-AKU", "name": "S-1 Akuntansi", "type": "Sarjana", "focus": "Financial Accounting, Taxation, Auditing"},
+          {"code": "S1-HUK", "name": "S-1 Hukum", "type": "Sarjana", "focus": "Corporate Law, Cyber Law, Intellectual Property"},
+          {"code": "S1-IKOM", "name": "S-1 Ilmu Komunikasi", "type": "Sarjana", "focus": "Digital Marketing, Public Relations, Media Production, Content Creation"},
+          {"code": "S1-MAN", "name": "S-1 Manajemen", "type": "Sarjana", "focus": "Business Management, Marketing, Finance, HR"}
+        ]
+      },
+      {
+        "id": "psikopen",
+        "name": "Fakultas Psikologi & Pendidikan (Psikopen)",
+        "description": "Membentuk mahasiswa yang mampu memahami, membimbing, dan mengembangkan potensi individu melalui pendekatan psikologis dan pedagogis.",
+        "programs": [
+          {"code": "S1-PSI", "name": "S-1 Psikologi", "type": "Sarjana", "focus": "Industrial Psychology, User Research, HR Development"},
+          {"code": "S1-PGSD", "name": "S-1 Pendidikan Guru Sekolah Dasar", "type": "Sarjana", "focus": "Primary Education, Curriculum Design, EdTech"}
+        ]
+      },
+      {
+        "id": "vokasi",
+        "name": "Sekolah Vokasi",
+        "description": "Menyiapkan lulusan siap kerja melalui program berbasis praktik langsung, sertifikasi kompetensi, dan terhubung dengan industri.",
+        "programs": [
+          {"code": "D4-ASP", "name": "D-4 Akuntansi Sektor Publik", "type": "Vokasi", "focus": "Public Sector Accounting, Government Financial Management"},
+          {"code": "D4-KEB", "name": "D-4 Kebidanan", "type": "Vokasi", "focus": "Midwifery, Maternal Health"},
+          {"code": "D4-TI", "name": "D-4 Teknik Informatika", "type": "Vokasi", "focus": "Applied IT, Software Development, Network Administration"},
+          {"code": "D3-AKU", "name": "D-3 Akuntansi", "type": "Vokasi", "focus": "Accounting Practice, Bookkeeping, Taxation"},
+          {"code": "D3-DKV", "name": "D-3 Desain Komunikasi Visual", "type": "Vokasi", "focus": "Graphic Design, UI Design, Branding, Visual Communication"},
+          {"code": "D3-FAR", "name": "D-3 Farmasi", "type": "Vokasi", "focus": "Pharmaceutical Practice, Drug Administration"},
+          {"code": "D3-KEP", "name": "D-3 Keperawatan", "type": "Vokasi", "focus": "Nursing Practice, Patient Care"},
+          {"code": "D3-PRH", "name": "D-3 Perhotelan", "type": "Vokasi", "focus": "Hospitality Management, Hotel Operations"},
+          {"code": "D3-TE", "name": "D-3 Teknik Elektronika", "type": "Vokasi", "focus": "Electronic Systems, Circuit Design, IoT"},
+          {"code": "D3-TK", "name": "D-3 Teknik Komputer", "type": "Vokasi", "focus": "Computer Hardware, Networking, System Maintenance"},
+          {"code": "D3-TM", "name": "D-3 Teknik Mesin", "type": "Vokasi", "focus": "Mechanical Workshop, CAD/CAM, Manufacturing"},
+          {"code": "PPB", "name": "Pendidikan Profesi Bidan", "type": "Profesi", "focus": "Professional Midwifery Certification"}
+        ]
+      }
+    ]
+  },
+  "career_to_program_mapping": {
+    "description": "Mapping karier ke program studi Universitas Harkat Negeri (termasuk vokasi)",
+    "mappings": [
+      {
+        "career": "AI Engineer / Machine Learning Engineer",
+        "match": 92,
+        "programs": ["S1-TI", "S1-SD"],
+        "reason": "Perlu dasar pemrograman kuat + matematika/statistik"
+      },
+      {
+        "career": "Frontend Developer",
+        "match": 89,
+        "programs": ["S1-TI", "D4-TI"],
+        "reason": "Web technologies, UI implementation. D4 lebih praktis/fokus industri"
+      },
+      {
+        "career": "UI/UX Designer",
+        "match": 85,
+        "programs": ["S1-TI", "D3-DKV", "S1-IKOM"],
+        "reason": "D3 DKV = desain visual praktis. S1 = lebih ke research & strategy"
+      },
+      {
+        "career": "Data Analyst / Data Scientist",
+        "match": 88,
+        "programs": ["S1-SD", "S1-TI"],
+        "reason": "Statistik, machine learning, data visualization"
+      },
+      {
+        "career": "Cyber Security Analyst",
+        "match": 82,
+        "programs": ["S1-TI", "S1-SI"],
+        "reason": "Networking, system security, ethical hacking"
+      },
+      {
+        "career": "Software Engineer",
+        "match": 87,
+        "programs": ["S1-TI", "D4-TI"],
+        "reason": "Software development. D4 lebih ke practical skills"
+      },
+      {
+        "career": "Cloud / Network Engineer",
+        "match": 80,
+        "programs": ["S1-TI", "D3-TK"],
+        "reason": "D3 Teknik Komputer = hands-on networking & hardware"
+      },
+      {
+        "career": "IT Support / System Admin",
+        "match": 75,
+        "programs": ["D3-TK", "D3-TE", "D4-TI"],
+        "reason": "Vokasi = siap kerja langsung, sertifikasi kompetensi"
+      },
+      {
+        "career": "IT Project Manager",
+        "match": 78,
+        "programs": ["S1-SI", "S1-MAN"],
+        "reason": "Kombinasi teknologi + manajemen bisnis"
+      },
+      {
+        "career": "Digital Marketing Specialist",
+        "match": 75,
+        "programs": ["S1-IKOM", "S1-MAN"],
+        "reason": "Content strategy, analytics, brand management"
+      },
+      {
+        "career": "Product Manager (Tech)",
+        "match": 80,
+        "programs": ["S1-SI", "S1-MAN"],
+        "reason": "Bridge antara teknologi dan bisnis"
+      },
+      {
+        "career": "Content Creator / Digital Media",
+        "match": 72,
+        "programs": ["S1-IKOM", "D3-DKV"],
+        "reason": "D3 DKV = visual creation praktis. S1 IKOM = strategy & storytelling"
+      },
+      {
+        "career": "Robotics / IoT Engineer",
+        "match": 70,
+        "programs": ["S1-TM", "D3-TE", "S1-TI"],
+        "reason": "D3 TE = hands-on elektronika. S1 TM = engineering principles"
+      },
+      {
+        "career": "User Researcher",
+        "match": 73,
+        "programs": ["S1-PSI", "S1-TI"],
+        "reason": "Psikologi + HCI (Human-Computer Interaction)"
+      },
+      {
+        "career": "Graphic Designer / Visual Designer",
+        "match": 76,
+        "programs": ["D3-DKV"],
+        "reason": "Desain komunikasi visual = core competency"
+      },
+      {
+        "career": "Accountant / Financial Analyst",
+        "match": 70,
+        "programs": ["S1-AKU", "D3-AKU", "D4-ASP"],
+        "reason": "D3/D4 = praktisi. S1 = analitis & konsultan"
+      },
+      {
+        "career": "Lawyer / Legal Consultant (Cyber Law)",
+        "match": 65,
+        "programs": ["S1-HUK"],
+        "reason": "Hukum siber, IP, regulasi teknologi"
+      },
+      {
+        "career": "EdTech Developer",
+        "match": 71,
+        "programs": ["S1-TI", "S1-PGSD"],
+        "reason": "Technology + education domain knowledge"
+      }
+    ]
+  }
+}
