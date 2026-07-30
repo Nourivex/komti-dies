@@ -13,6 +13,12 @@ export default defineConfig({
       spa: {
         enabled: true,
       },
+      pages: [
+        { path: "/" },
+        { path: "/tika" },
+        { path: "/cyber" },
+        { path: "/navigator" },
+      ],
       server: { entry: "server" },
     }),
     react(),
