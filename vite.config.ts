@@ -10,6 +10,9 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     tanstackStart({
+      spa: {
+        enabled: true,
+      },
       server: { entry: "server" },
     }),
     react(),
