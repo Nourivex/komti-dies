@@ -54,7 +54,7 @@ export function TikaScene({
     <div className={`relative ${className}`}>
       <CanvasErrorBoundary>
         <Canvas
-          camera={{ position: [0, 0.5, 4], fov: 30 }}
+          camera={{ position: [0, 1.5, 5], fov: 30 }}
           gl={{ antialias: true, alpha: true }}
           style={{ background: "transparent" }}
           dpr={[1, 2]}

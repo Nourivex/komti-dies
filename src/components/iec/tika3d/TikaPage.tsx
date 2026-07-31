@@ -463,7 +463,7 @@ export function TikaPage() {
           <div className="relative h-full w-full">
             <CanvasErrorBoundary>
               <Canvas
-                camera={{ position: [0, 0.5, 4.5], fov: 30 }}
+                camera={{ position: [0, 1.5, 4], fov: 30 }}
                 gl={{ antialias: true, alpha: true }}
                 style={{ background: "transparent" }}
                 dpr={[1, 2]}
@@ -488,6 +488,7 @@ export function TikaPage() {
                   <OrbitControls
                     enableZoom={false}
                     enablePan={false}
+                    target={[0, 0.8, 0]}
                     minPolarAngle={Math.PI / 3}
                     maxPolarAngle={Math.PI / 2.2}
                     autoRotate={charState === "idle"}
@@ -518,7 +519,7 @@ export function TikaPage() {
           <div className="relative h-40 w-full shrink-0 border-b border-glass-border bg-gradient-to-b from-rose/5 to-transparent lg:hidden">
             <CanvasErrorBoundary>
               <Canvas
-                camera={{ position: [0, 0.5, 4.5], fov: 30 }}
+                camera={{ position: [0, 1.5, 4], fov: 30 }}
                 gl={{ antialias: true, alpha: true }}
                 style={{ background: "transparent" }}
                 dpr={[1, 2]}
