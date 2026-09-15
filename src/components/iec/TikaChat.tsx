@@ -75,34 +75,12 @@ export function TikaChat() {
     }
   }, [charState, input]);
 
-  // Text-to-Speech
-  const speak = useCallback(
-    (text: string) => {
-      if (!("speechSynthesis" in window)) return;
+  // Text-to-Speech (Disabled to prevent inconsistent/robotic browser voices)
+  const speak = useCallback((_text: string) => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
-      const clean = text
-        .replace(
-          /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}]/gu,
-          "",
-        )
-        .replace(/[•\-✓★●◆]/g, "")
-        .replace(/\n+/g, ". ")
-        .trim();
-      if (!clean) return;
-      const u = new SpeechSynthesisUtterance(clean);
-      u.lang = "id-ID";
-      u.rate = 1.0;
-      u.pitch = 1.1;
-      const voices = window.speechSynthesis.getVoices();
-      const idVoice = voices.find((v) => v.lang.startsWith("id"));
-      if (idVoice) u.voice = idVoice;
-      u.onend = () =>
-        setCharState(input.trim().length > 0 ? "listening" : "idle");
-      u.onerror = () => setCharState("idle");
-      window.speechSynthesis.speak(u);
-    },
-    [input],
-  );
+    }
+  }, []);
 
   const sendMessage = useCallback(
     (text?: string) => {

@@ -105,45 +105,12 @@ export function TikaPage() {
     }
   }, [charState, input]);
 
-  // Text-to-Speech using browser SpeechSynthesis
-  const speak = useCallback(
-    (text: string) => {
-      if (!("speechSynthesis" in window)) return;
-
-      // Cancel any ongoing speech
+  // Text-to-Speech (Disabled to prevent inconsistent/robotic browser voices)
+  const speak = useCallback((_text: string) => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
-
-      // Clean text for TTS (remove emojis, markdown, special chars)
-      const cleanText = text
-        .replace(/[\u{1F600}-\u{1F64F}]/gu, "") // emoticons
-        .replace(/[\u{1F300}-\u{1F5FF}]/gu, "") // symbols & pictographs
-        .replace(/[\u{1F680}-\u{1F6FF}]/gu, "") // transport & map
-        .replace(/[\u{1F1E0}-\u{1F1FF}]/gu, "") // flags
-        .replace(/[•\-✓★●◆]/g, "") // bullet points
-        .replace(/\n+/g, ". ") // newlines to pauses
-        .trim();
-
-      if (!cleanText) return;
-
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.lang = "id-ID"; // Indonesian
-      utterance.rate = 1.0;
-      utterance.pitch = 1.1; // Friendly tone
-      utterance.volume = 1.0;
-
-      // Try to find Indonesian voice
-      const voices = window.speechSynthesis.getVoices();
-      const idVoice = voices.find((v) => v.lang.startsWith("id"));
-      if (idVoice) utterance.voice = idVoice;
-
-      utterance.onend = () =>
-        setCharState(input.trim().length > 0 ? "listening" : "idle");
-      utterance.onerror = () => setCharState("idle");
-
-      window.speechSynthesis.speak(utterance);
-    },
-    [input],
-  );
+    }
+  }, []);
 
   const sendMessage = useCallback(
     (text?: string) => {
