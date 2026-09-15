@@ -7,7 +7,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
-import { TikaScene } from "./tika3d";
+import { TikaAvatar } from "./avatar";
+import type { TikaAvatarState } from "./avatar";
+import { getTikaResponse } from "@/lib/tika-service";
 import {
   UHN_PROFILE,
   CAMPUSES,
@@ -28,69 +30,6 @@ interface ChatMessage {
   text: string;
 }
 
-function match(text: string, keywords: string[]): boolean {
-  return keywords.some((kw) => text.includes(kw));
-}
-
-function findResponse(input: string): string {
-  const text = input.toLowerCase().trim();
-
-  if (match(text, ["halo", "hai", "hi", "hello", "hey"]))
-    return `Halo! 👋 Aku TIKA, asisten digital ${UHN_PROFILE.name}. Ada yang bisa aku bantu?`;
-
-  if (match(text, ["siapa kamu", "kamu siapa", "apa itu tika"]))
-    return `Aku TIKA (Teknik Informatika Knowledge Assistant) 🤖\n\nAsisten digital dari ${UHN_PROFILE.abbreviation}. Siap bantu info seputar kampus! 😊`;
-
-  if (match(text, ["tentang", "profil", "sejarah", "uhn", "universitas"]))
-    return `${UHN_PROFILE.name}\n\n📋 ${UHN_PROFILE.status}\n📅 Berdiri: ${UHN_PROFILE.founded}\n🎯 "${UHN_PROFILE.tagline}"\n\n📍 ${CAMPUSES.length} Kampus di Tegal & Brebes\n🌐 ${CONTACTS.website}`;
-
-  if (match(text, ["program studi", "prodi", "jurusan"])) {
-    const result = PROGRAM_DETAILS.map((p) => `  ${p.isNew ? "🆕" : "•"} ${p.name}`).join("\n");
-    return `${UHN_PROFILE.abbreviation} memiliki ${PROGRAM_DETAILS.length} program studi unggulan:\n\n${result}`;
-  }
-
-  if (match(text, ["informatika", "teknik informatika"]))
-    return `${PROGRAM_DETAILS[0].name}\n\n🎯 ${PROGRAM_DETAILS[0].focus}\n\n${PROGRAM_DETAILS[0].description}\n\n💼 Gaji: Rp 7-15 juta/bulan`;
-
-  if (match(text, ["sains data", "data science"]))
-    return `🆕 ${PROGRAM_DETAILS[2].name}\n\n🎯 ${PROGRAM_DETAILS[2].focus}\n\nCocok buat yang suka analisis & ML!`;
-
-  if (match(text, ["sistem informasi"]))
-    return `${PROGRAM_DETAILS[1].name}\n\n🎯 ${PROGRAM_DETAILS[1].focus}\n\n💼 Gaji: Rp 6-12 juta/bulan`;
-
-  if (match(text, ["fasilitas", "lab", "laboratorium"]))
-    return `Fasilitas:\n\n🏫 ${FACILITIES.general.join(", ")}\n\n💻 Informatika:\n${FACILITIES.informatika.map((f) => `• ${f}`).join("\n")}`;
-
-  if (match(text, ["organisasi", "ukm", "komunitas", "himpunan"]))
-    return `Organisasi & UKM:\n${ORGANIZATIONS.map((o) => `• ${o.name}`).join("\n")}`;
-
-  if (match(text, ["karier", "kerja", "lulusan", "prospek"]))
-    return `Prospek Karier:\n${CAREER_PROSPECTS.map((c) => `• ${c.career} - ${c.salary}`).join("\n")}`;
-
-  if (match(text, ["beasiswa"]))
-    return `Beasiswa:\n${SCHOLARSHIPS.map((s) => `🏆 ${s}`).join("\n")}`;
-
-  if (match(text, ["daftar", "pendaftaran", "pmb"]))
-    return `Pendaftaran:\n${ADMISSION.paths.map((p) => `• ${p}`).join("\n")}\n\n🌐 ${ADMISSION.portal}`;
-
-  if (match(text, ["biaya", "spp", "bayar"]))
-    return `Pendaftaran & Biaya:\n• Biaya Pendaftaran: ${ADMISSION.registration_fee.S1_Teknik_Informatika}\n• Gelombang: ${ADMISSION.current_wave}`;
-
-  if (match(text, ["alamat", "lokasi", "tegal"]))
-    return `Lokasi:\n${CAMPUSES.map((c) => `📍 ${c.name}: ${c.address.split(",").slice(0, 2).join(",")}`).join("\n")}`;
-
-  if (match(text, ["kontak", "telepon", "wa", "hotline"]))
-    return `📞 ${CONTACTS.hotline}\n🌐 ${CONTACTS.website}\n📧 ${CONTACTS.email_umum}\n📱 Instagram: ${CONTACTS.instagram}`;
-
-  if (match(text, ["mitra", "industri", "kerjasama"]))
-    return `Mitra Industri:\n${INDUSTRY_PARTNERS.map((p) => `🏢 ${p}`).join("\n")}`;
-
-  if (match(text, ["terima kasih", "makasih", "thanks"]))
-    return "Sama-sama! 😊 Ada lagi yang mau ditanyakan?";
-
-  return `Hmm, coba tanya tentang program studi, pendaftaran, fasilitas, karier, atau beasiswa ya! 😊`;
-}
-
 export function TikaChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -101,10 +40,27 @@ export function TikaChat() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [charState, setCharState] = useState<"idle" | "speaking" | "thinking">(
-    "idle",
-  );
+  const [charState, setCharState] = useState<TikaAvatarState>("idle");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Monitor network status for graceful offline fallback
+  useEffect(() => {
+    const handleOnline = () => {
+      setCharState((prev) => (prev === "offline" ? "idle" : prev));
+    };
+    const handleOffline = () => {
+      setCharState("offline");
+    };
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    if (!navigator.onLine) setCharState("offline");
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -112,35 +68,41 @@ export function TikaChat() {
 
   useEffect(() => {
     if (charState === "speaking") {
-      const t = setTimeout(() => setCharState("idle"), 2000);
+      const t = setTimeout(() => {
+        setCharState(input.trim().length > 0 ? "listening" : "idle");
+      }, 2000);
       return () => clearTimeout(t);
     }
-  }, [charState]);
+  }, [charState, input]);
 
   // Text-to-Speech
-  const speak = useCallback((text: string) => {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const clean = text
-      .replace(
-        /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}]/gu,
-        "",
-      )
-      .replace(/[•\-✓★●◆]/g, "")
-      .replace(/\n+/g, ". ")
-      .trim();
-    if (!clean) return;
-    const u = new SpeechSynthesisUtterance(clean);
-    u.lang = "id-ID";
-    u.rate = 1.0;
-    u.pitch = 1.1;
-    const voices = window.speechSynthesis.getVoices();
-    const idVoice = voices.find((v) => v.lang.startsWith("id"));
-    if (idVoice) u.voice = idVoice;
-    u.onend = () => setCharState("idle");
-    u.onerror = () => setCharState("idle");
-    window.speechSynthesis.speak(u);
-  }, []);
+  const speak = useCallback(
+    (text: string) => {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const clean = text
+        .replace(
+          /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}]/gu,
+          "",
+        )
+        .replace(/[•\-✓★●◆]/g, "")
+        .replace(/\n+/g, ". ")
+        .trim();
+      if (!clean) return;
+      const u = new SpeechSynthesisUtterance(clean);
+      u.lang = "id-ID";
+      u.rate = 1.0;
+      u.pitch = 1.1;
+      const voices = window.speechSynthesis.getVoices();
+      const idVoice = voices.find((v) => v.lang.startsWith("id"));
+      if (idVoice) u.voice = idVoice;
+      u.onend = () =>
+        setCharState(input.trim().length > 0 ? "listening" : "idle");
+      u.onerror = () => setCharState("idle");
+      window.speechSynthesis.speak(u);
+    },
+    [input],
+  );
 
   const sendMessage = useCallback(
     (text?: string) => {
@@ -152,18 +114,30 @@ export function TikaChat() {
       ]);
       setInput("");
       setCharState("thinking");
-      setTimeout(() => {
-        const response = findResponse(msg);
+      setTimeout(async () => {
+        const response = await getTikaResponse(msg);
         setMessages((prev) => [
           ...prev,
           { id: Date.now() + 1, sender: "bot", text: response },
         ]);
         setCharState("speaking");
         speak(response);
-      }, 600);
+      }, 500);
     },
     [input, speak],
   );
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setInput(val);
+    if (
+      charState !== "speaking" &&
+      charState !== "thinking" &&
+      charState !== "offline"
+    ) {
+      setCharState(val.trim().length > 0 ? "listening" : "idle");
+    }
+  };
 
   return (
     <>
@@ -214,17 +188,14 @@ export function TikaChat() {
                 </button>
               </div>
 
-              {/* 3D */}
+              {/* Video Avatar */}
               <div className="relative h-48 w-full shrink-0 border-b border-glass-border bg-gradient-to-b from-rose/5 to-transparent sm:h-56">
-                <TikaScene
-                  speaking={charState === "speaking"}
-                  thinking={charState === "thinking"}
+                <TikaAvatar
+                  state={charState}
+                  showStatusBadge={true}
+                  badgePosition="bottom-center"
                   className="h-full w-full"
                 />
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full border border-glass-border bg-glass px-3 py-1 text-[0.65rem] backdrop-blur-md">
-                  <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-rose align-middle" />
-                  TIKA {charState === "speaking" ? "🗣️" : ""}
-                </div>
               </div>
 
               {/* Messages */}
@@ -284,7 +255,7 @@ export function TikaChat() {
                 >
                   <input
                     value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={handleInputChange}
                     placeholder="Ketik pertanyaan..."
                     className="flex-1 rounded-full border border-glass-border bg-glass px-4 py-2.5 text-sm outline-none focus:border-rose/40"
                   />
