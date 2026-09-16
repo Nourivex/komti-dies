@@ -5,18 +5,7 @@ import type {
   TikaAvatarAssetConfig,
 } from "./types";
 
-/**
- * Next likely state map for targeted progressive preloading.
- * Prevents loading all avatar videos at once.
- */
-const NEXT_LIKELY_STATE: Record<TikaAvatarState, TikaAvatarState | null> = {
-  idle: "listening",
-  listening: "thinking",
-  thinking: "speaking",
-  speaking: "idle",
-  offline: null,
-  error: null,
-};
+export type ActiveVideoType = "idle" | "speaking";
 
 const DEFAULT_STATUS_LABELS: Record<
   TikaAvatarState,
@@ -50,10 +39,15 @@ export const TikaAvatar = memo(function TikaAvatar({
   // Detect low performance or data saver
   const [useStaticFallback, setUseStaticFallback] = useState(false);
 
+  // Target video type: only 'idle' and 'speaking' video assets are used
+  const targetVideo: ActiveVideoType =
+    state === "speaking" ? "speaking" : "idle";
+  const currentVideoRef = useRef<ActiveVideoType>("idle");
+
   // Double-buffering state: alternate between slot 'A' and slot 'B'
   const [activeSlot, setActiveSlot] = useState<"A" | "B">("A");
-  const [slotAState, setSlotAState] = useState<TikaAvatarState>(state);
-  const [slotBState, setSlotBState] = useState<TikaAvatarState | null>(null);
+  const [slotAVideo, setSlotAVideo] = useState<ActiveVideoType>("idle");
+  const [slotBVideo, setSlotBVideo] = useState<ActiveVideoType | null>(null);
   const [slotAReady, setSlotAReady] = useState(false);
   const [slotBReady, setSlotBReady] = useState(false);
 
@@ -67,7 +61,6 @@ export const TikaAvatar = memo(function TikaAvatar({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Check prefers-reduced-motion
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
 
@@ -76,7 +69,6 @@ export const TikaAvatar = memo(function TikaAvatar({
     };
     mediaQuery.addEventListener("change", handleMotionChange);
 
-    // Check Data Saver capability if available
     const nav = navigator as unknown as { connection?: { saveData?: boolean } };
     if (nav.connection?.saveData) {
       setUseStaticFallback(true);
@@ -87,15 +79,15 @@ export const TikaAvatar = memo(function TikaAvatar({
     };
   }, []);
 
-  // Helper to resolve asset URLs
+  // Helper to resolve asset URLs (only idle and speaking video files needed)
   const getAsset = useCallback(
-    (s: TikaAvatarState): TikaAvatarAssetConfig => {
-      if (customAssets?.[s]) {
-        return customAssets[s]!;
+    (v: ActiveVideoType): TikaAvatarAssetConfig => {
+      if (customAssets?.[v]) {
+        return customAssets[v]!;
       }
       return {
-        webm: `${basePath}/${s}.webm`,
-        mp4: `${basePath}/${s}.mp4`,
+        webm: `${basePath}/${v}.webm`,
+        mp4: `${basePath}/${v}.mp4`,
         poster: `${basePath}/poster.webp`,
       };
     },
@@ -110,40 +102,45 @@ export const TikaAvatar = memo(function TikaAvatar({
     useStaticFallback;
 
   // Next likely state URL for targeted preloading
-  const nextLikelyState = NEXT_LIKELY_STATE[state];
-  const nextLikelyAsset = nextLikelyState ? getAsset(nextLikelyState) : null;
+  const nextLikelyVideo: ActiveVideoType =
+    targetVideo === "idle" ? "speaking" : "idle";
+  const nextLikelyAsset = getAsset(nextLikelyVideo);
 
   // Handle state transitions with seamless double-buffered crossfade
   useEffect(() => {
     if (isStaticMode) {
-      // Pause both videos in static mode
       videoRefA.current?.pause();
       videoRefB.current?.pause();
       return;
     }
 
+    // If the video asset is already playing (e.g. idle -> listening -> thinking), don't reload or crossfade!
+    if (targetVideo === currentVideoRef.current && (slotAReady || slotBReady)) {
+      return;
+    }
+
+    currentVideoRef.current = targetVideo;
     const currentSlot = activeSlotRef.current;
     const incomingSlot = currentSlot === "A" ? "B" : "A";
-    const currentVideo =
+    const currentVideoEl =
       currentSlot === "A" ? videoRefA.current : videoRefB.current;
-    const incomingVideo =
+    const incomingVideoEl =
       incomingSlot === "A" ? videoRefA.current : videoRefB.current;
 
-    // Set incoming slot state
+    // Set incoming slot video asset
     if (incomingSlot === "A") {
-      setSlotAState(state);
+      setSlotAVideo(targetVideo);
       setSlotAReady(false);
     } else {
-      setSlotBState(state);
+      setSlotBVideo(targetVideo);
       setSlotBReady(false);
     }
 
-    if (incomingVideo) {
-      incomingVideo.load();
-      const playPromise = incomingVideo.play();
+    if (incomingVideoEl) {
+      incomingVideoEl.load();
+      const playPromise = incomingVideoEl.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
-          // Playback blocked or failed (e.g. low-power mode on mobile)
           console.warn(
             "[TIKA Avatar] Video autoplay prevented, falling back to static poster",
             err,
@@ -163,14 +160,14 @@ export const TikaAvatar = memo(function TikaAvatar({
 
       // Pause old video after transition crossfade
       setTimeout(() => {
-        currentVideo?.pause();
+        currentVideoEl?.pause();
       }, 350);
     }, 400);
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [state, isStaticMode, onError]);
+  }, [targetVideo, isStaticMode, onError, slotAReady, slotBReady]);
 
   // When incoming video has enough data to play smoothly
   const handleCanPlay = useCallback(
@@ -242,17 +239,17 @@ export const TikaAvatar = memo(function TikaAvatar({
             activeSlot === "A" && slotAReady ? "opacity-100" : "opacity-0"
           }`}
         >
-          {slotAState && (
+          {slotAVideo && (
             <>
-              <source src={getAsset(slotAState).webm} type="video/webm" />
-              <source src={getAsset(slotAState).mp4} type="video/mp4" />
+              <source src={getAsset(slotAVideo).webm} type="video/webm" />
+              <source src={getAsset(slotAVideo).mp4} type="video/mp4" />
             </>
           )}
         </video>
       )}
 
       {/* HTML5 Video Layer B */}
-      {!isStaticMode && slotBState && (
+      {!isStaticMode && slotBVideo && (
         <video
           ref={videoRefB}
           autoPlay
@@ -266,12 +263,12 @@ export const TikaAvatar = memo(function TikaAvatar({
             activeSlot === "B" && slotBReady ? "opacity-100" : "opacity-0"
           }`}
         >
-          <source src={getAsset(slotBState).webm} type="video/webm" />
-          <source src={getAsset(slotBState).mp4} type="video/mp4" />
+          <source src={getAsset(slotBVideo).webm} type="video/webm" />
+          <source src={getAsset(slotBVideo).mp4} type="video/mp4" />
         </video>
       )}
 
-      {/* Targeted Preloader: ONLY preload the single next likely state video */}
+      {/* Targeted Preloader: ONLY preload the next likely video (idle <-> speaking) */}
       {!isStaticMode && nextLikelyAsset && (
         <video
           preload="auto"
